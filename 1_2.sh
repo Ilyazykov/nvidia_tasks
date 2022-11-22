@@ -1,0 +1,1 @@
+grep "my konfu is the best" *.py | sed -r 's/:.+//'
