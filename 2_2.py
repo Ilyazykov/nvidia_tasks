@@ -1,24 +1,23 @@
 import subprocess
 
 
-def getServers(config):
+def get_servers(config):
     with open(config) as f:
         lines = f.read().splitlines()
     return lines
 
 
-def runCommandOnServers(command, config):
-    hosts = getServers(config)
+def run_command_on_servers(command, config):
+    hosts = get_servers(config)
 
     processes = []
-    i = 3
     for host in hosts:
         ssh_command = f"ssh {host} {command}"
-        
+
         p = subprocess.Popen(ssh_command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
+                             shell=True,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
         processes.append(p)
 
         p.wait()
@@ -28,7 +27,12 @@ def runCommandOnServers(command, config):
         print(out)
 
 
-runCommandOnServers("run", "/Users/i.zykov/Desktop/servers.cfg")
+def main():
+    run_command_on_servers("run", "/Users/i.zykov/Desktop/servers.cfg")
+
+
+if __name__ == "__main__":
+    main()
 
 # servers.cfg:
 # ---------------------
