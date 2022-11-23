@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 
 
@@ -27,8 +28,19 @@ def run_command_on_servers(command, config):
         print(out)
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--command', type=str, default="run")
+    parser.add_argument('--config', type=str, default="/Users/i.zykov/Desktop/servers.cfg")
+
+    args = parser.parse_args()
+    return args
+
+
 def main():
-    run_command_on_servers("run", "/Users/i.zykov/Desktop/servers.cfg")
+    args = parse_arguments()
+    run_command_on_servers(args.command, args.config)
 
 
 if __name__ == "__main__":
