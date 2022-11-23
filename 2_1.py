@@ -1,6 +1,7 @@
+import argparse
+import os
 import shutil
 import subprocess
-import os
 import time
 
 MEGABYTE = 1048576
@@ -73,8 +74,22 @@ def create_isos(input_disk):
         fill_file(NEW_FILE_SIZE, input_disk, output_file)
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--free-space', type=int, default=512)
+    parser.add_argument('--new-file-size', type=int, default=1)
+    parser.add_argument('--new-file-count', type=int, default=2)
+    parser.add_argument('--work-folder', type=str, default="/Users/i.zykov/code/temp")
+
+    args = parser.parse_args()
+    return args
+
+
 def main():
-    input_disk = get_disk(EXPECTED_FREE_SPACE)
+    args = parse_arguments()
+
+    input_disk = get_disk(args.free)
 
     start_time = time.time()
     create_isos(input_disk)
