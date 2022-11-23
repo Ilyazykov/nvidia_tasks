@@ -1,1 +1,1 @@
-rm testdir/**/*.pyc
+find testdir -type f -name '*.pyc' -exec rm {} +
